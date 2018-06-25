@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+ <!-- 启动注解的默认配置 -->
+ <!-- 如果不启动,会导致一些功能组件的失效 -->
+ <!-- JSON的解释组件失效 -->
+ <!-- 上传组件的失效 -->
+ <!-- mvc:*,有很多组件的失效 -->
+ <mvc:annotation-driven></mvc:annotation-driven>
+ <!-- 方式1 -->
+  <!-- 表示不拦截静态资源 -->
+  <!-- 开放全部的目录的静态资源 -->
+  <mvc:default-servlet-handler/>
+  <!-- 使用扫描器 -->
+  <context:component-scan base-package="com.haidong.controller"></context:component-scan>
+  
+  <!-- 视图解释器,SpringMVC已经默认配置JSP视图的解释器了,所以可以不用配置 -->
+
+</beans>
