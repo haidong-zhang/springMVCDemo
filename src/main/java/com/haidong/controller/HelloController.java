@@ -14,8 +14,8 @@ public class HelloController {
 	@RequestMapping(value="/say.mvc")
 	public String say(Model model){
 		System.out.println("-say-");
-		//·µ»ØÊÓÍ¼
-		model.addAttribute("msg","ÕÅÈý");
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
+		model.addAttribute("msg","ï¿½ï¿½ï¿½ï¿½");
 		return "/hello.jsp";
 	}
 	
@@ -23,9 +23,9 @@ public class HelloController {
 	public ModelAndView say1(){
 		System.out.println("say1");
 		ModelAndView modelAndView = new ModelAndView();
-		//·µ»ØÊÓÍ¼
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼asdfasdfasdf
 		modelAndView.setViewName("/hello.jsp");
-		modelAndView.addObject("msg","ÀîËÄ");
+		modelAndView.addObject("msg","ï¿½ï¿½ï¿½ï¿½");
 		return modelAndView;
 	}
 }
