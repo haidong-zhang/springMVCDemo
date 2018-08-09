@@ -23,7 +23,6 @@ public class HelloController {
 	public ModelAndView say1(){
 		System.out.println("say1");
 		ModelAndView modelAndView = new ModelAndView();
-		//������ͼasdfasdfasdf
 		modelAndView.setViewName("/hello.jsp");
 		modelAndView.addObject("msg","����");
 		return modelAndView;
