@@ -5,3 +5,5 @@
 **/tt/
 /.idea
 /*.iml
+.idea
+*.iml
