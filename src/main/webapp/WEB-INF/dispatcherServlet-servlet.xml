@@ -18,7 +18,7 @@
   <mvc:default-servlet-handler/>
   <!-- 使用扫描器 -->
   <context:component-scan base-package="com.haidong.controller"></context:component-scan>
-  
+    <context:property-placeholder location="classpath*:*.properties"></context:property-placeholder>
   <!-- 视图解释器,SpringMVC已经默认配置JSP视图的解释器了,所以可以不用配置 -->
 
 </beans>
