@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-  欢迎你,${msg}
+${msg}
 </body>
 </html>

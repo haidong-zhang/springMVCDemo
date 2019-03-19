@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
  <!-- 启动注解的默认配置 -->
  <!-- 如果不启动,会导致一些功能组件的失效 -->
  <!-- JSON的解释组件失效 -->
@@ -17,8 +17,46 @@
   <!-- 开放全部的目录的静态资源 -->
   <mvc:default-servlet-handler/>
   <!-- 使用扫描器 -->
-  <context:component-scan base-package="com.haidong.controller"></context:component-scan>
+  <context:component-scan base-package="com.haidong"></context:component-scan>
   
   <!-- 视图解释器,SpringMVC已经默认配置JSP视图的解释器了,所以可以不用配置 -->
 
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" validator="validator">
+        <mvc:path-matching suffix-pattern="false"/>
+     <!--   <mvc:argument-resolvers>
+            <bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver"/>
+        </mvc:argument-resolvers>-->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper" ref="jacksonObjectMapper"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="favorPathExtension" value="false" />
+        <property name="favorParameter" value="true" />
+        <property name="mediaTypes" >
+            <value>
+                json=application/json
+            </value>
+        </property>
+    </bean>
+    <bean id="jacksonObjectMapper" class="com.haidong.serialize.JsonObjectMapper"/>
+
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+       <!-- <property name="validationMessageSource" ref="messageSource"/>-->
+    </bean>
+    <!-- 校验错误信息配置文件 -->
+    <!--<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        &lt;!&ndash; 资源文件名 &ndash;&gt;
+        <property name="basename" value="classpath:validationMessages.properties"/>
+        &lt;!&ndash; 对资源文件内容缓存时间，单位秒 &ndash;&gt;
+        <property name="fileEncodings" value="GBK"/>
+        <property name="defaultEncoding" value="GBK"/>
+        <property name="cacheSeconds" value="120"/>
+    </bean>-->
+    <mvc:default-servlet-handler/>
 </beans>
